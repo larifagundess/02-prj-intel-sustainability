@@ -8,32 +8,28 @@ body {
 }
 
 /* HERO */
-.hero {
+.hero{
   position: relative;
+  color: #fff;
+  padding: 90px 16px 80px;
+
   background-image: url("img/hero-bg.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
-  color: #ffffff;
-  padding: 90px 16px 80px;
-  overflow: hidden;
 }
-
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.55); /* dark overlay */
-  z-index: 0;
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,.55);
 }
-
-.hero-inner {
+.hero-inner{
+  position: relative;
+  z-index: 1;
   max-width: 980px;
   margin: 0 auto;
   text-align: center;
-  position: relative; /* ADD */
-  z-index: 1;         /* ADD */
 }
 
 .hero-title {
@@ -41,6 +37,14 @@ body {
   text-align: center;
   word-break: break-word;    /*  never cut off */
 }
+.hero-logo{
+  width: 96px !important;
+  height: auto !important;
+  max-width: 96px !important;
+  display: block;
+  margin: 0 auto 16px;
+}
+
 /* STAGE */
 .stage {
   padding-bottom: 40px;
