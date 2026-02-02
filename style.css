@@ -2,11 +2,12 @@
 html, body { margin: 0; padding: 0; }
 body{
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  line-height: 1.5;
   color:#0f172a;
   background:#ffffff;
 }
 
-/* ===== HERO (professor-style) ===== */
+/* ===== HERO ===== */
 header{
   background: linear-gradient(135deg, #0984e3 0%, #0068b5 45%, #003b71 100%);
   color: #fff;
@@ -20,7 +21,7 @@ header > div{
 }
 
 header img{
-  width: 96px;
+  width: 110px;          /* resize SVG logo */
   height: auto;
   margin-bottom: 16px;
   filter: drop-shadow(0 10px 18px rgba(0,0,0,.25));
@@ -37,7 +38,6 @@ header h1{
   padding-bottom: 14px;
 }
 
-/* the little underline line like the example */
 header h1::after{
   content:"";
   position:absolute;
@@ -58,37 +58,43 @@ header p{
   opacity: .95;
 }
 
-/* ===== TIMELINE STAGE (light gray strip) ===== */
+/* ===== TIMELINE (desktop: horizontal scroll) ===== */
 section{
-  background: #f3f5f7;
+  background: #f3f5f7;              /* “stage” like the example */
   padding: 40px 16px 34px;
   display: flex;
   gap: 22px;
-
   max-width: 980px;
-  margin: -35px auto 0;         /* pulls cards upward like the example */
+  margin: -35px auto 0;             /* pulls timeline up a bit */
   border-radius: 12px;
 
-  overflow-x: auto;              /* horizontal scroll */
-  scroll-snap-type: x mandatory; /* extra credit */
+  overflow-x: auto;                 /* horizontal scroll */
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;    /* EXTRA CREDIT: scroll snap */
   -webkit-overflow-scrolling: touch;
 }
 
-section > div{
-  flex: 0 0 210px; /* smaller cards like the example */
-  background: #fff;
-  border: 1px solid rgba(15,23,42,.10);
-  border-radius: 0;             /* professor example looks square */
-  box-shadow: 0 10px 20px rgba(2,6,23,.08);
-  overflow: hidden;
-
-  scroll-snap-align: start;
-
-  position: relative;
-  transition: transform .25s ease, box-shadow .25s ease;
+/* optional scrollbar polish */
+section::-webkit-scrollbar { height: 10px; }
+section::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,.18);
+  border-radius: 999px;
 }
 
-/* Year + Title spacing like the example */
+/* ===== Cards ===== */
+section > div{
+  flex: 0 0 220px;                  /* card width */
+  background: #fff;
+  border: 1px solid rgba(15,23,42,.10);
+  box-shadow: 0 10px 20px rgba(2,6,23,.08);
+  overflow: hidden;
+  scroll-snap-align: start;
+  position: relative;
+
+  transition: transform .25s ease, box-shadow .25s ease; /* EXTRA CREDIT: transitions */
+}
+
+/* Year & title */
 section > div h2{
   margin: 14px 14px 4px;
   color: #0b62b0;
@@ -103,57 +109,52 @@ section > div h3{
   color: #111827;
 }
 
-/* Your paragraph becomes the hover-overlay content */
-section > div p{
-  margin: 0;
-  padding: 12px 14px 14px;
-  font-size: 12px;
-  line-height: 1.55;
-  color: #111827;
-}
-
-/* ---- Fake "image area" if you haven't added images yet ---- */
-section > div::before{
-  content:"";
-  display:block;
-  height: 110px;
-  background:
-    radial-gradient(450px circle at 15% 20%, rgba(0,104,181,.25), transparent 55%),
-    linear-gradient(135deg, rgba(0,104,181,.18), rgba(0,59,113,.10));
+/* Image (EXTRA CREDIT: custom images) */
+.card-img{
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  display: block;
+  border-top: 1px solid rgba(15,23,42,.06);
   border-bottom: 1px solid rgba(15,23,42,.10);
 }
 
-/* ===== Hover overlay (dark card effect like professor) ===== */
-section > div p{
-  /* start hidden like overlay */
+/* Summary shows by default */
+.summary{
+  margin: 0;
+  padding: 12px 14px 14px;
+  font-size: 12px;
+  color: #111827;
+}
+
+/* Details hidden until hover */
+.details{
+  margin: 0;
   position: absolute;
   inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: left;
-
   padding: 18px;
   background: rgba(0, 59, 113, 0.92);
   color: rgba(255,255,255,.92);
+  font-size: 12px;
+  line-height: 1.55;
 
   opacity: 0;
-  transform: translateY(8px);
-  transition: opacity .25s ease, transform .25s ease;
+  transform: translateY(10px);
+  transition: opacity .25s ease, transform .25s ease;  /* EXTRA CREDIT */
 }
 
-/* on hover: show the overlay */
-section > div:hover p{
-  opacity: 1;
-  transform: translateY(0);
-}
-
+/* Hover: reveal details + lift card (EXTRA CREDIT transforms) */
 section > div:hover{
   transform: translateY(-6px);
   box-shadow: 0 18px 40px rgba(2,6,23,.18);
 }
 
-/* ===== Footer hint ===== */
+section > div:hover .details{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hint text */
 body > p{
   text-align:center;
   margin: 14px 0 44px;
@@ -168,6 +169,7 @@ body > p{
     max-width: none;
     flex-direction: column;
     overflow-x: visible;
+    overflow-y: visible;
     scroll-snap-type: none;
   }
 
@@ -175,14 +177,14 @@ body > p{
     flex: 1 1 auto;
   }
 
-  /* On touch devices hover isn't reliable → show paragraph normally */
-  section > div p{
+  /* On touch devices hover isn't reliable → show details normally */
+  .details{
     position: static;
     inset: auto;
-    background: transparent;
-    color: #111827;
     opacity: 1;
     transform: none;
-    display: block;
+    background: transparent;
+    color: #111827;
+    padding: 0 14px 14px;
   }
 }
