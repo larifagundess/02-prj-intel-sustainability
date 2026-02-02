@@ -1,5 +1,6 @@
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
+
 body{
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   line-height: 1.5;
@@ -7,27 +8,27 @@ body{
   background:#ffffff;
 }
 
-/* ===== HERO ===== */
-header{
+/* ===== HERO (matches professor vibe) ===== */
+.hero{
   background: linear-gradient(135deg, #0984e3 0%, #0068b5 45%, #003b71 100%);
   color: #fff;
-  padding: 70px 16px 60px;
+  padding: 74px 16px 62px;
 }
 
-header > div{
+.hero-inner{
   max-width: 980px;
   margin: 0 auto;
   text-align: center;
 }
 
-header img{
-  width: 110px;          /* resize SVG logo */
+.hero-logo{
+  width: 96px;
   height: auto;
   margin-bottom: 16px;
   filter: drop-shadow(0 10px 18px rgba(0,0,0,.25));
 }
 
-header h1{
+.hero-title{
   margin: 0 0 14px 0;
   font-size: clamp(28px, 4.2vw, 46px);
   font-weight: 800;
@@ -38,7 +39,7 @@ header h1{
   padding-bottom: 14px;
 }
 
-header h1::after{
+.hero-title::after{
   content:"";
   position:absolute;
   left:50%;
@@ -50,7 +51,7 @@ header h1::after{
   border-radius: 999px;
 }
 
-header p{
+.hero-subtitle{
   margin: 0 auto;
   max-width: 720px;
   font-size: 14px;
@@ -58,68 +59,85 @@ header p{
   opacity: .95;
 }
 
-/* ===== TIMELINE (desktop: horizontal scroll) ===== */
-section{
-  background: #f3f5f7;              /* “stage” like the example */
-  padding: 40px 16px 34px;
-  display: flex;
-  gap: 22px;
+/* ===== Stage area (light gray strip like example) ===== */
+.stage{
+  background: #ffffff;
+  padding: 0 0 30px;
+}
+
+.timeline{
+  background: #f3f5f7;
   max-width: 980px;
-  margin: -35px auto 0;             /* pulls timeline up a bit */
+  margin: -36px auto 0;          /* pulls timeline upward */
+  padding: 34px 16px 28px;
   border-radius: 12px;
 
-  overflow-x: auto;                 /* horizontal scroll */
+  display: flex;
+  gap: 22px;
+
+  overflow-x: auto;               /* horizontal scroll */
   overflow-y: hidden;
-  scroll-snap-type: x mandatory;    /* EXTRA CREDIT: scroll snap */
+
+  scroll-snap-type: x mandatory;  /* extra credit: scroll snap */
   -webkit-overflow-scrolling: touch;
 }
 
-/* optional scrollbar polish */
-section::-webkit-scrollbar { height: 10px; }
-section::-webkit-scrollbar-thumb {
+/* Optional scrollbar polish */
+.timeline::-webkit-scrollbar { height: 10px; }
+.timeline::-webkit-scrollbar-thumb {
   background: rgba(0,0,0,.18);
   border-radius: 999px;
 }
 
 /* ===== Cards ===== */
-section > div{
-  flex: 0 0 220px;                  /* card width */
+.card{
+  flex: 0 0 220px;
   background: #fff;
   border: 1px solid rgba(15,23,42,.10);
   box-shadow: 0 10px 20px rgba(2,6,23,.08);
   overflow: hidden;
+
   scroll-snap-align: start;
+
   position: relative;
 
-  transition: transform .25s ease, box-shadow .25s ease; /* EXTRA CREDIT: transitions */
+  transition: transform .25s ease, box-shadow .25s ease; /* extra credit: transitions */
 }
 
-/* Year & title */
-section > div h2{
+/* Titles */
+.year{
   margin: 14px 14px 4px;
   color: #0b62b0;
   font-size: 15px;
   font-weight: 800;
 }
 
-section > div h3{
+.card-title{
   margin: 0 14px 10px;
   font-size: 13px;
   font-weight: 700;
   color: #111827;
 }
 
-/* Image (EXTRA CREDIT: custom images) */
+/* Media wrapper lets us show a nice placeholder even if image is missing */
+.media{
+  height: 120px;
+  background:
+    radial-gradient(420px circle at 20% 20%, rgba(0,104,181,.22), transparent 55%),
+    linear-gradient(135deg, rgba(0,104,181,.16), rgba(0,59,113,.10));
+  border-top: 1px solid rgba(15,23,42,.06);
+  border-bottom: 1px solid rgba(15,23,42,.10);
+}
+
+/* Image */
 .card-img{
   width: 100%;
   height: 120px;
   object-fit: cover;
   display: block;
-  border-top: 1px solid rgba(15,23,42,.06);
-  border-bottom: 1px solid rgba(15,23,42,.10);
 }
 
-/* Summary shows by default */
+/* Summary shows normally */
 .summary{
   margin: 0;
   padding: 12px 14px 14px;
@@ -140,32 +158,30 @@ section > div h3{
 
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity .25s ease, transform .25s ease;  /* EXTRA CREDIT */
+  transition: opacity .25s ease, transform .25s ease; /* extra credit */
 }
 
-/* Hover: reveal details + lift card (EXTRA CREDIT transforms) */
-section > div:hover{
-  transform: translateY(-6px);
+.card:hover{
+  transform: translateY(-6px); /* extra credit: transform */
   box-shadow: 0 18px 40px rgba(2,6,23,.18);
 }
 
-section > div:hover .details{
+.card:hover .details{
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Hint text */
-body > p{
+.hint{
   text-align:center;
-  margin: 14px 0 44px;
+  margin: 14px 0 0;
   font-size: 12px;
   color: rgba(15,23,42,.65);
 }
 
 /* ===== Mobile: stack vertically ===== */
 @media (max-width: 760px){
-  section{
-    margin: 18px 12px 0;
+  .timeline{
+    margin: 16px 12px 0;
     max-width: none;
     flex-direction: column;
     overflow-x: visible;
@@ -173,11 +189,11 @@ body > p{
     scroll-snap-type: none;
   }
 
-  section > div{
+  .card{
     flex: 1 1 auto;
   }
 
-  /* On touch devices hover isn't reliable → show details normally */
+  /* Hover isn't reliable on phones, so show details normally */
   .details{
     position: static;
     inset: auto;
