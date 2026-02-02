@@ -1,206 +1,172 @@
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 
-body{
+body {
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  line-height: 1.5;
-  color:#0f172a;
-  background:#ffffff;
+  background: #ffffff;
+  color: #0f172a;
 }
 
-/* ===== HERO (matches professor vibe) ===== */
-.hero{
+/* HERO */
+.hero {
   background: linear-gradient(135deg, #0984e3 0%, #0068b5 45%, #003b71 100%);
   color: #fff;
-  padding: 74px 16px 62px;
+  padding: 72px 16px 60px;
 }
 
-.hero-inner{
+.hero-inner {
   max-width: 980px;
   margin: 0 auto;
   text-align: center;
 }
 
-.hero-logo{
+.hero-logo {
   width: 96px;
-  height: auto;
   margin-bottom: 16px;
-  filter: drop-shadow(0 10px 18px rgba(0,0,0,.25));
 }
 
-.hero-title{
-  margin: 0 0 14px 0;
-  font-size: clamp(28px, 4.2vw, 46px);
+.hero-title {
+  font-size: clamp(28px, 4vw, 46px);
   font-weight: 800;
-  letter-spacing: 0.6px;
   text-transform: uppercase;
+  letter-spacing: 0.6px;
   position: relative;
   display: inline-block;
   padding-bottom: 14px;
 }
 
-.hero-title::after{
-  content:"";
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-  bottom:0;
+.hero-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 72px;
   height: 3px;
-  background: rgba(255,255,255,.75);
-  border-radius: 999px;
+  background: rgba(255,255,255,.8);
 }
 
-.hero-subtitle{
-  margin: 0 auto;
+.hero-subtitle {
   max-width: 720px;
+  margin: 12px auto 0;
   font-size: 14px;
   line-height: 1.7;
   opacity: .95;
 }
 
-/* ===== Stage area (light gray strip like example) ===== */
-.stage{
-  background: #ffffff;
-  padding: 0 0 30px;
+/* STAGE */
+.stage {
+  padding-bottom: 40px;
 }
 
-.timeline{
-  background: #f3f5f7;
+/* TIMELINE */
+.timeline {
   max-width: 980px;
-  margin: -36px auto 0;          /* pulls timeline upward */
-  padding: 34px 16px 28px;
+  margin: -36px auto 0;
+  padding: 34px 16px;
+  background: #f3f5f7;
   border-radius: 12px;
 
   display: flex;
   gap: 22px;
-
-  overflow-x: auto;               /* horizontal scroll */
-  overflow-y: hidden;
-
-  scroll-snap-type: x mandatory;  /* extra credit: scroll snap */
-  -webkit-overflow-scrolling: touch;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
 }
 
-/* Optional scrollbar polish */
-.timeline::-webkit-scrollbar { height: 10px; }
+.timeline::-webkit-scrollbar {
+  height: 10px;
+}
+
 .timeline::-webkit-scrollbar-thumb {
-  background: rgba(0,0,0,.18);
+  background: rgba(0,0,0,.2);
   border-radius: 999px;
 }
 
-/* ===== Cards ===== */
-.card{
+/* CARD */
+.card {
   flex: 0 0 220px;
   background: #fff;
-  border: 1px solid rgba(15,23,42,.10);
-  box-shadow: 0 10px 20px rgba(2,6,23,.08);
-  overflow: hidden;
-
-  scroll-snap-align: start;
-
+  box-shadow: 0 10px 20px rgba(0,0,0,.1);
   position: relative;
-
-  transition: transform .25s ease, box-shadow .25s ease; /* extra credit: transitions */
+  overflow: hidden;
+  scroll-snap-align: start;
+  transition: transform .25s ease, box-shadow .25s ease;
 }
 
-/* Titles */
-.year{
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0,0,0,.18);
+}
+
+.year {
   margin: 14px 14px 4px;
-  color: #0b62b0;
-  font-size: 15px;
+  color: #0068b5;
   font-weight: 800;
 }
 
-.card-title{
+.card-title {
   margin: 0 14px 10px;
   font-size: 13px;
-  font-weight: 700;
-  color: #111827;
 }
 
-/* Media wrapper lets us show a nice placeholder even if image is missing */
-.media{
-  height: 120px;
-  background:
-    radial-gradient(420px circle at 20% 20%, rgba(0,104,181,.22), transparent 55%),
-    linear-gradient(135deg, rgba(0,104,181,.16), rgba(0,59,113,.10));
-  border-top: 1px solid rgba(15,23,42,.06);
-  border-bottom: 1px solid rgba(15,23,42,.10);
-}
-
-/* Image */
-.card-img{
+.card-img {
   width: 100%;
   height: 120px;
   object-fit: cover;
   display: block;
 }
 
-/* Summary shows normally */
-.summary{
-  margin: 0;
+/* TEXT */
+.summary {
   padding: 12px 14px 14px;
   font-size: 12px;
-  color: #111827;
 }
 
-/* Details hidden until hover */
-.details{
-  margin: 0;
+/* HOVER OVERLAY */
+.details {
   position: absolute;
   inset: 0;
-  padding: 18px;
   background: rgba(0, 59, 113, 0.92);
-  color: rgba(255,255,255,.92);
+  color: #fff;
+  padding: 18px;
   font-size: 12px;
   line-height: 1.55;
 
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity .25s ease, transform .25s ease; /* extra credit */
+  transition: opacity .25s ease, transform .25s ease;
 }
 
-.card:hover{
-  transform: translateY(-6px); /* extra credit: transform */
-  box-shadow: 0 18px 40px rgba(2,6,23,.18);
-}
-
-.card:hover .details{
+.card:hover .details {
   opacity: 1;
   transform: translateY(0);
 }
 
-.hint{
-  text-align:center;
-  margin: 14px 0 0;
+/* FOOTER TEXT */
+.hint {
+  text-align: center;
+  margin-top: 14px;
   font-size: 12px;
-  color: rgba(15,23,42,.65);
+  color: rgba(0,0,0,.6);
 }
 
-/* ===== Mobile: stack vertically ===== */
-@media (max-width: 760px){
-  .timeline{
-    margin: 16px 12px 0;
-    max-width: none;
+/* MOBILE */
+@media (max-width: 760px) {
+  .timeline {
     flex-direction: column;
     overflow-x: visible;
-    overflow-y: visible;
     scroll-snap-type: none;
   }
 
-  .card{
+  .card {
     flex: 1 1 auto;
   }
 
-  /* Hover isn't reliable on phones, so show details normally */
-  .details{
+  .details {
     position: static;
-    inset: auto;
     opacity: 1;
     transform: none;
     background: transparent;
-    color: #111827;
-    padding: 0 14px 14px;
+    color: #0f172a;
   }
 }
