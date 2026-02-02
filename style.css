@@ -9,56 +9,31 @@ body {
 
 /* HERO */
 .hero {
-  background: linear-gradient(135deg, #0984e3 0%, #0068b5 45%, #003b71 100%);
-  color: #fff;
-  padding: 72px 16px 60px;
+  position: relative;
+  background-image: url("img/hero-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  color: #ffffff;
+  padding: 90px 16px 80px;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55); /* dark overlay */
+  z-index: 0;
 }
 
 .hero-inner {
   max-width: 980px;
   margin: 0 auto;
   text-align: center;
-}
-
-.hero-logo {
-  width: 96px;
-  height: auto;
-  margin-bottom: 16px;
-}
-
-.hero-title {
-  font-size: clamp(28px, 4vw, 46px);
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
-  position: relative;
-  display: inline-block;
-  padding-bottom: 14px;
-}
-
-.hero-title::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 72px;
-  height: 3px;
-  background: rgba(255,255,255,.8);
-}
-
-.hero-subtitle {
-  max-width: 720px;
-  margin: 12px auto 0;
-  font-size: 14px;
-  line-height: 1.7;
-  opacity: .95;
-}
-
-.hero-inner {
-  display: flex;             /*  stack properly */
-  flex-direction: column;
-  align-items: center;
+  position: relative; /* ADD */
+  z-index: 1;         /* ADD */
 }
 
 .hero-title {
