@@ -22,6 +22,7 @@ body {
 
 .hero-logo {
   width: 96px;
+  height: auto;
   margin-bottom: 16px;
 }
 
@@ -71,6 +72,9 @@ body {
   gap: 22px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+
+  -webkit-overflow-scrolling: touch; 
+  overflow-y: hidden;                
 }
 
 .timeline::-webkit-scrollbar {
@@ -168,5 +172,6 @@ body {
     transform: none;
     background: transparent;
     color: #0f172a;
+    padding: 0 14px 14px; /* ADD THIS */
   }
 }
